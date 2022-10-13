@@ -16,10 +16,10 @@ const background=new Sprite({
 const shop = new Sprite({
   position: {
     x: 1400,
-    y: 365,
+    y: 305,
   },
   imageSrc: "./img/shop.png",
-  scale:2.75,
+  scale:3.25,
   framesMax:6,
 });
 
@@ -138,10 +138,10 @@ const enemy = new Fighter({
   },
   attackBox: {
     offset: {
-      x: -150,
+      x: -200,
       y: 50,
     },
-    width: 200,
+    width: 100,
     height: 50,
   },
 });
@@ -268,16 +268,21 @@ window.addEventListener("keydown", (event) => {
   switch (event.key) {
     //Player Movement
     case "d":
-      keys.d.pressed = true;
-      player.lastKey = "d";
+        keys.d.pressed = true;
+        player.lastKey = "d";
+        if(player.position.x>=1690)
+        player.position.x=1690;
       break;
     case "a":
       keys.a.pressed = true;
       player.lastKey = "a";
+      if (player.position.x <= 1) player.position.x = 1;
       break;
     case "w":
-      player.velocity.y = -20;
-      // player.lastKey = "w";
+      if(player.position.y>250){
+      player.velocity.y = -17;
+      }
+      console.log(player.position.y);
       break;
     case " ":
       player.attack();
@@ -290,13 +295,17 @@ window.addEventListener("keydown", (event) => {
     case "ArrowRight":
       keys.ArrowRight.pressed = true;
       enemy.lastKey = "ArrowRight";
+      if (enemy.position.x >= 1690) enemy.position.x = 1690;
       break;
     case "ArrowLeft":
       keys.ArrowLeft.pressed = true;
       enemy.lastKey = "ArrowLeft";
+      if (enemy.position.x <= 1) enemy.position.x = 1;
       break;
     case "ArrowUp":
-      enemy.velocity.y = -20;
+      if(enemy.position.y>250){
+      enemy.velocity.y = -17;
+      }
       break;
     case "ArrowDown":
       enemy.attack();
