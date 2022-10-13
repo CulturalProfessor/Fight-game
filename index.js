@@ -1,7 +1,7 @@
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
-canvas.width = "1024";
-canvas.height = "576";
+canvas.width = "1900";
+canvas.height = "885";
 c.fillRect(0, 0, canvas.width, canvas.height);
 const gravity = 0.7;
 
@@ -15,8 +15,8 @@ const background=new Sprite({
 
 const shop = new Sprite({
   position: {
-    x: 600,
-    y: 128,
+    x: 1400,
+    y: 365,
   },
   imageSrc: "./img/shop.png",
   scale:2.75,
@@ -25,7 +25,7 @@ const shop = new Sprite({
 
 const player = new Fighter({
   position: {
-    x: 0,
+    x: 100,
     y: 0,
   },
   velocity: {
@@ -40,7 +40,7 @@ const player = new Fighter({
   framesMax: 8,
   scale: 2.5,
   offset: {
-    x: 215,
+    x: 100,
     y: 157,
   },
   sprites: {
@@ -78,7 +78,7 @@ const player = new Fighter({
       x: 100,
       y: 50,
     },
-    width: 160,
+    width: 200,
     height: 50,
   },
 });
@@ -87,7 +87,7 @@ player.draw();
 
 const enemy = new Fighter({
   position: {
-    x: 400,
+    x: 1500,
     y: 100,
   },
   velocity: {
@@ -141,7 +141,7 @@ const enemy = new Fighter({
       x: -150,
       y: 50,
     },
-    width: 150,
+    width: 200,
     height: 50,
   },
 });
@@ -184,10 +184,10 @@ function animate() {
   //Player Movement
 
   if (keys.a.pressed && player.lastKey == "a") {
-    player.velocity.x = -5;
+    player.velocity.x = -10;
     player.switchSprite("run");
   } else if (keys.d.pressed && player.lastKey == "d") {
-    player.velocity.x = 5;
+    player.velocity.x = 10;
     player.switchSprite("run");
   } else {
     player.switchSprite("idle");
@@ -202,10 +202,10 @@ function animate() {
 
   //Enemy movement
   if (keys.ArrowLeft.pressed && enemy.lastKey == "ArrowLeft") {
-    enemy.velocity.x = -5;
+    enemy.velocity.x = -10;
     enemy.switchSprite("run");
   } else if (keys.ArrowRight.pressed && enemy.lastKey == "ArrowRight") {
-    enemy.velocity.x = 5;
+    enemy.velocity.x = 10;
     enemy.switchSprite("run");
   } else {
     enemy.switchSprite("idle");

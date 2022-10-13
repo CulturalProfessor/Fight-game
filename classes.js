@@ -119,9 +119,9 @@ class Fighter extends Sprite {
     this.position.y += this.velocity.y;
 
     // gravity function
-    if (this.position.y + this.height + this.velocity.y >= canvas.height - 96) {
+    if (this.position.y + this.height + this.velocity.y >= canvas.height - 170) {
       this.velocity.y = 0;
-      this.position.y = 330;
+      this.position.y = 570;
     } else this.velocity.y += gravity;
   }
 
@@ -131,7 +131,7 @@ class Fighter extends Sprite {
   }
 
   takeHit() {
-    this.health -= 20;
+    this.health -= 10;
 
     if (this.health <= 0) {
       this.switchSprite("death");
