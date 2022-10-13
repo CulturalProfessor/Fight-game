@@ -1,3 +1,13 @@
+var audio = new Audio("music.mp3");
+audio.autoplay = true;
+audio.play();
+audio.volume = 0.5;
+setInterval(() => {
+  audio.autoplay = true;
+  audio.play();
+  audio.volume = 0.5;
+},120000);
+
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
 canvas.width = "1900";
@@ -5,13 +15,13 @@ canvas.height = "885";
 c.fillRect(0, 0, canvas.width, canvas.height);
 const gravity = 0.7;
 
-const background=new Sprite({
-  position:{
-    x:0,
-    y:0,
+const background = new Sprite({
+  position: {
+    x: 0,
+    y: 0,
   },
-  imageSrc:'./img/background.png'
-})
+  imageSrc: "./img/background.png",
+});
 
 const shop = new Sprite({
   position: {
@@ -19,8 +29,8 @@ const shop = new Sprite({
     y: 305,
   },
   imageSrc: "./img/shop.png",
-  scale:3.25,
-  framesMax:6,
+  scale: 3.25,
+  framesMax: 6,
 });
 
 const player = new Fighter({
@@ -84,7 +94,6 @@ const player = new Fighter({
 });
 player.draw();
 
-
 const enemy = new Fighter({
   position: {
     x: 1500,
@@ -133,7 +142,7 @@ const enemy = new Fighter({
     },
     death: {
       imageSrc: "./img/kenji/Death.png",
-      framesMax:7,
+      framesMax: 7,
     },
   },
   attackBox: {
@@ -173,8 +182,8 @@ function animate() {
   //Objects Rendering
   background.update();
   shop.update();
-  c.fillStyle='rgba(255,255,255,0.2)'
-  c.fillRect(0, 0,canvas.width, canvas.height)
+  c.fillStyle = "rgba(255,255,255,0.2)";
+  c.fillRect(0, 0, canvas.width, canvas.height);
   player.update();
   enemy.update();
 
@@ -244,7 +253,7 @@ function animate() {
       rectangle2: player,
     }) &&
     enemy.isAttacking &&
-    enemy.framesCurrent===2
+    enemy.framesCurrent === 2
   ) {
     player.takeHit();
     enemy.isAttacking = false;
@@ -264,69 +273,68 @@ function animate() {
 animate();
 
 window.addEventListener("keydown", (event) => {
-  if(!player.dead){
-  switch (event.key) {
-    //Player Movement
-    case "d":
+  if (!player.dead) {
+    switch (event.key) {
+      //Player Movement
+      case "d":
         keys.d.pressed = true;
         player.lastKey = "d";
-        if(player.position.x>=1690)
-        player.position.x=1690;
-      break;
-    case "a":
-      keys.a.pressed = true;
-      player.lastKey = "a";
-      if (player.position.x <= 1) player.position.x = 1;
-      break;
-    case "w":
-      if(player.position.y>250){
-      player.velocity.y = -17;
-      }
-      console.log(player.position.y);
-      break;
-    case " ":
-      player.attack();
-      break;
+        if (player.position.x >= 1690) player.position.x = 1690;
+        break;
+      case "a":
+        keys.a.pressed = true;
+        player.lastKey = "a";
+        if (player.position.x <= 1) player.position.x = 1;
+        break;
+      case "w":
+        if (player.position.y > 250) {
+          player.velocity.y = -17;
+        }
+        console.log(player.position.y);
+        break;
+      case " ":
+        player.attack();
+        break;
+    }
   }
-}
-    //Enemy Movement
-    if(!enemy.dead){
+  //Enemy Movement
+  if (!enemy.dead) {
     switch (event.key) {
-    case "ArrowRight":
-      keys.ArrowRight.pressed = true;
-      enemy.lastKey = "ArrowRight";
-      if (enemy.position.x >= 1690) enemy.position.x = 1690;
-      break;
-    case "ArrowLeft":
-      keys.ArrowLeft.pressed = true;
-      enemy.lastKey = "ArrowLeft";
-      if (enemy.position.x <= 1) enemy.position.x = 1;
-      break;
-    case "ArrowUp":
-      if(enemy.position.y>250){
-      enemy.velocity.y = -17;
-      }
-      break;
-    case "ArrowDown":
-      enemy.attack();
-      break;
+      case "ArrowRight":
+        keys.ArrowRight.pressed = true;
+        enemy.lastKey = "ArrowRight";
+        if (enemy.position.x >= 1690) enemy.position.x = 1690;
+        break;
+      case "ArrowLeft":
+        keys.ArrowLeft.pressed = true;
+        enemy.lastKey = "ArrowLeft";
+        if (enemy.position.x <= 1) enemy.position.x = 1;
+        break;
+      case "ArrowUp":
+        if (enemy.position.y > 250) {
+          enemy.velocity.y = -17;
+        }
+        break;
+      case "ArrowDown":
+        enemy.attack();
+        break;
+    }
   }
-}
-addEventListener("keyup", (event) => {
-  switch (event.key) {
-    case "d":
-      keys.d.pressed = false;
-      break;
-    case "a":
-      keys.a.pressed = false;
-      break;
-    //Enemy Keys
-    case "ArrowRight":
-      keys.ArrowRight.pressed = false;
-      break;
-    case "ArrowLeft":
-      keys.ArrowLeft.pressed = false;
-  }
-  console.log(event);
-})
-})
+  addEventListener("keyup", (event) => {
+    switch (event.key) {
+      case "d":
+        keys.d.pressed = false;
+        break;
+      case "a":
+        keys.a.pressed = false;
+        break;
+      //Enemy Keys
+      case "ArrowRight":
+        keys.ArrowRight.pressed = false;
+        break;
+      case "ArrowLeft":
+        keys.ArrowLeft.pressed = false;
+    }
+    console.log(event);
+  });
+});
