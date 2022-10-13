@@ -1,4 +1,4 @@
-var audio = new Audio("music.mp3");
+var audio = new Audio("./music.mp3");
 audio.autoplay = true;
 audio.play();
 audio.volume = 0.5;
