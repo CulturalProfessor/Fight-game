@@ -119,14 +119,21 @@ class Fighter extends Sprite {
     this.position.y += this.velocity.y;
 
     // gravity function
-    if (this.position.y + this.height + this.velocity.y >= canvas.height - 170) {
+    if (
+      this.position.y + this.height + this.velocity.y >=
+      canvas.height - 170
+    ) {
       this.velocity.y = 0;
       this.position.y = 570;
     } else this.velocity.y += gravity;
   }
 
-  attack() {
+  attack1() {
     this.switchSprite("attack1");
+    this.isAttacking = true;
+  }
+  attack2() {
+    this.switchSprite("attack2");
     this.isAttacking = true;
   }
 
@@ -144,8 +151,14 @@ class Fighter extends Sprite {
         this.dead = true;
       return;
     }
+    // overriding all other animations with the attack2 animation
+    if (
+      this.image === this.sprites.attack2.image &&
+      this.framesCurrent < this.sprites.attack2.framesMax - 1
+    )
+      return;
 
-    // overriding all other animations with the attack animation
+    // overriding all other animations with the attack1 animation
     if (
       this.image === this.sprites.attack1.image &&
       this.framesCurrent < this.sprites.attack1.framesMax - 1
@@ -194,6 +207,14 @@ class Fighter extends Sprite {
         if (this.image !== this.sprites.attack1.image) {
           this.image = this.sprites.attack1.image;
           this.framesMax = this.sprites.attack1.framesMax;
+          this.framesCurrent = 0;
+        }
+        break;
+
+      case "attack2":
+        if (this.image !== this.sprites.attack2.image) {
+          this.image = this.sprites.attack2.image;
+          this.framesMax = this.sprites.attack2.framesMax;
           this.framesCurrent = 0;
         }
         break;

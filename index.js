@@ -74,6 +74,10 @@ const player = new Fighter({
       imageSrc: "./img/samuraiMack/Attack1.png",
       framesMax: 6,
     },
+    attack2: {
+      imageSrc: "./img/samuraiMack/Attack2.png",
+      framesMax: 6,
+    },
     takeHit: {
       imageSrc: "./img/samuraiMack/Take Hit - white silhouette.png",
       framesMax: 4,
@@ -136,6 +140,10 @@ const enemy = new Fighter({
       imageSrc: "./img/kenji/Attack1.png",
       framesMax: 4,
     },
+    attack2: {
+      imageSrc: "./img/kenji/Attack2.png",
+      framesMax: 4,
+    },
     takeHit: {
       imageSrc: "./img/kenji/Take hit.png",
       framesMax: 3,
@@ -147,7 +155,7 @@ const enemy = new Fighter({
   },
   attackBox: {
     offset: {
-      x: -200,
+      x: -250,
       y: 50,
     },
     width: 100,
@@ -232,7 +240,6 @@ function animate() {
   } else if (enemy.velocity.y > 0) {
     enemy.switchSprite("fall");
   }
-
   //Collision Detection
   //for player collision
   if (
@@ -297,7 +304,10 @@ window.addEventListener("keydown", (event) => {
         console.log(player.position.y);
         break;
       case " ":
-        player.attack();
+        player.attack1();
+        break;
+      case "f":
+        player.attack2();
         break;
     }
   }
@@ -320,7 +330,10 @@ window.addEventListener("keydown", (event) => {
         }
         break;
       case "ArrowDown":
-        enemy.attack();
+        enemy.attack1();
+        break;
+      case "Control":
+        enemy.attack2();
         break;
     }
   }
