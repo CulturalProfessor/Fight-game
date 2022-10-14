@@ -1,4 +1,4 @@
-var audio = new Audio("music.mp3");
+var audio = new Audio("./music.mp3");
 audio.autoplay = true;
 audio.play();
 audio.volume = 0.5;
@@ -6,7 +6,7 @@ setInterval(() => {
   audio.autoplay = true;
   audio.play();
   audio.volume = 0.5;
-},120000);
+}, 120000);
 
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
@@ -189,9 +189,15 @@ function animate() {
 
   player.velocity.x = 0;
   enemy.velocity.x = 0;
+  
+  //player bound
+  if (player.position.x >= 1700) player.position.x = 1700;
+  if (player.position.x <= -100) player.position.x = -100;
+  //enemy bound
+  if (enemy.position.x >= 1750) enemy.position.x = 1750;
+  if (enemy.position.x <= 1) enemy.position.x = 1;
 
   //Player Movement
-
   if (keys.a.pressed && player.lastKey == "a") {
     player.velocity.x = -10;
     player.switchSprite("run");
@@ -279,12 +285,10 @@ window.addEventListener("keydown", (event) => {
       case "d":
         keys.d.pressed = true;
         player.lastKey = "d";
-        if (player.position.x >= 1690) player.position.x = 1690;
         break;
       case "a":
         keys.a.pressed = true;
         player.lastKey = "a";
-        if (player.position.x <= 1) player.position.x = 1;
         break;
       case "w":
         if (player.position.y > 250) {
@@ -303,12 +307,12 @@ window.addEventListener("keydown", (event) => {
       case "ArrowRight":
         keys.ArrowRight.pressed = true;
         enemy.lastKey = "ArrowRight";
-        if (enemy.position.x >= 1690) enemy.position.x = 1690;
+
         break;
       case "ArrowLeft":
         keys.ArrowLeft.pressed = true;
         enemy.lastKey = "ArrowLeft";
-        if (enemy.position.x <= 1) enemy.position.x = 1;
+
         break;
       case "ArrowUp":
         if (enemy.position.y > 250) {
